@@ -6,16 +6,23 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  StatusBar,
+  Dimensions
 } from 'react-native';
 
+import Theme from '../config/Theme';
+const { width, height } = Dimensions.get('window');
 
 export default class FindPage extends Component {
 
 	render() {
 		return (
 		<View style={styles.container}>
-			<Text style={{fontSize:30}}>发现页面</Text>
+			<Text style={styles.title}>发现</Text>
+			<StatusBar
+				barStyle={Theme.barStyle}
+				backgroundColor={Theme.primary}
+			/>
 		</View>
 		);
 	}
@@ -25,8 +32,15 @@ export default class FindPage extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
+		backgroundColor: Theme.paper,
+	},
+	title: {
+		fontSize:25,
+		backgroundColor: Theme.primary,
+		width: width,
+		height: 40,
+		textAlign:'center'
 	},
 });

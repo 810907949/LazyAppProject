@@ -8,9 +8,13 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
+  Animated,
+  Easing
 } from 'react-native';
 import {createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import Icon from 'react-native-vector-icons/Ionicons';
 
+import Theme from './config/Theme';
 import FirstPage from './pages/FirstPage';
 import ClassifyPage from './pages/ClassifyPage';
 import FindPage from './pages/FindPage';
@@ -26,7 +30,11 @@ const MainStack = createBottomTabNavigator(   //二级路由
 			navigationOptions:({navigation}) => ({  
 				tabBarLabel:'首页',  
 				tabBarIcon:({focused,tintColor}) => (  
-					<Text> ffff</Text> 
+					<Icon 
+                    name={focused ? 'ios-home' : 'ios-home'}
+                    size={26}
+                    style={{color: tintColor}}
+					/> 
 				)  
 			}),  
 		},
@@ -36,7 +44,11 @@ const MainStack = createBottomTabNavigator(   //二级路由
 			navigationOptions:({navigation}) => ({  
 				tabBarLabel:'分类',  
 				tabBarIcon:({focused,tintColor}) => (  
-					<Text> ffff</Text> 
+					<Icon 
+                    name={focused ? 'ios-paper' : 'ios-paper'}
+                    size={26}
+                    style={{color: tintColor}}
+					/> 
 				)  
 			}),  
 		},
@@ -46,7 +58,11 @@ const MainStack = createBottomTabNavigator(   //二级路由
 			navigationOptions:({navigation}) => ({  
 				tabBarLabel:'发现',  
 				tabBarIcon:({focused,tintColor}) => (  
-					<Text> ffff</Text> 
+					<Icon 
+                    name={focused ? 'ios-search' : 'ios-search'}
+                    size={26}
+                    style={{color: tintColor}}
+					/> 
 				)  
 			}),  
 		},
@@ -55,17 +71,38 @@ const MainStack = createBottomTabNavigator(   //二级路由
 			screen: UserPage,
 			navigationOptions:({navigation}) => ({  
 				tabBarLabel:'用户',  
-				tabBarIcon:({focused,tintColor}) => (  
-					<Text> ffff</Text> 
+				tabBarIcon:({focused,tintColor}) => ( 
+					<Icon 
+                    name={focused ? 'ios-person' : 'ios-person'}
+                    size={26}
+                    style={{color: tintColor}}
+					/> 
 				)  
 			}),  
 		},
 	},
+	{
+		backBehavior:"none",
+		animationEnabled: true,
+		swipeEnabled: true,
+		tabBarOptions: {
+			activeTintColor: Theme.primarySelected,
+			inactiveTintColor: 'black',
+			// activeBackgroundColor: "",
+			// inactiveBackgroundColor: "",
+			style :{
+				borderTopColor:'#ebebeb',
+				borderTopWidth:1,
+				backgroundColor:'white',
+			}
+		},
+	}
 );
+
 
 const RootStack = createStackNavigator(   //根路由
 	{
-		Tab:
+		Main:
 		{
 			screen: MainStack,
 			navigationOptions:({navigation}) => ({  
@@ -74,24 +111,56 @@ const RootStack = createStackNavigator(   //根路由
 		},
 		Setting:
 		{ 
-			screen: SettingPage 
+			screen: SettingPage ,
+			navigationOptions:({navigation}) => ({  
+				title:"设置",
+			})
 		},
 		Login:
 		{ 
-			screen: LoginPage 
+			screen: LoginPage ,
+			navigationOptions:({navigation}) => ({  
+				title:"登录",
+			})
 		},
 	},
+	{
+		navigationOptions: ({navigation}) => ({
+			title: navigation.state.routeName,
+			headerStyle: {
+				backgroundColor: '#f4511e',
+			},
+			headerTintColor: '#fff',
+			headerTitleStyle: {
+				fontWeight: 'bold',
+			},
+		}),
+		transitionConfig: () => ({
+			transitionSpec: {
+			  duration: 500,
+			  easing: Easing.out(Easing.poly(4)),
+			  timing: Animated.timing,
+			},
+			screenInterpolator: sceneProps => {
+				const {layout, position, scene} = sceneProps;
+                const {index} = scene;
+                const Width = layout.initWidth;
+                //沿X轴平移
+                const translateX = position.interpolate({
+                    inputRange: [index - 1, index, index + 1],
+                    outputRange: [Width, 0, -(Width - 10)],
+                });
+                //透明度
+                const opacity = position.interpolate({
+                    inputRange: [index - 1, index - 0.99, index],
+                    outputRange: [0, 1, 1],
+                });
+                return {opacity, transform: [{translateX}]};
+			},
+		}),
+	}
   );
-  
-  
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
+
 
 const App = createAppContainer(RootStack)
 export default App

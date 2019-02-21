@@ -6,16 +6,26 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  StatusBar,
+  Dimensions
 } from 'react-native';
 
+import {createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+
+import Theme from '../config/Theme';
+const { width, height } = Dimensions.get('window');
 
 export default class UserPage extends Component {
 
 	render() {
 	  return (
 		<View style={styles.container}>
-			<Text style={{fontSize:30}}>用户页面</Text>
+			<Text style={styles.title}>用户</Text>
+			<StatusBar
+				barStyle={Theme.barStyle}
+				backgroundColor={Theme.primary}
+			/>
 			<Button title='跳转登录页'
 					onPress={()=>this.props.navigation.navigate('Login')}
 			/>
@@ -31,8 +41,15 @@ export default class UserPage extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
+		backgroundColor: Theme.paper,
+	},
+	title: {
+		fontSize:25,
+		backgroundColor: Theme.primary,
+		width: width,
+		height: 40,
+		textAlign:'center'
 	},
 });
