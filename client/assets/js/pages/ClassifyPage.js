@@ -8,14 +8,22 @@ import {
   View,
   Button,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   TextInput,
   StatusBar,
-  Dimensions
+  Dimensions,
+  FlatList,
+  SectionList,
+  Keyboard
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Theme from '../config/Theme';
+import Datum from '../config/Datum';
 import SearchTextInput from '../components/SearchTextInput';
+import ClassifyLeftItem from './ClassifyLeftItem';
+import ClassifyRightPage from './ClassifyRightPage';
+
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
@@ -25,39 +33,94 @@ export default class ClassifyPage extends Component {
         super(props);
         this._onChangeText = this._onChangeText.bind(this);
         this.state = {
-            showValue:"",
+			showValue:"",
+			leftDataSource: Datum.classifyTypes,
+			rightDataSource: Datum.classifyTypeDatas,
+			curLeftSelectType:1,
         }
     }
 
 	_onChangeText(inputData){
-        console.log("输入的内容",inputData);
         //把获取到的内容，设置给showValue
         this.setState({showValue:inputData});
-    }
-
-	showData(){
-        alert(this.state.showValue);//展示输入框的内容
 	}
 	
+	showData(){
+		Keyboard.dismiss();
+		alert(this.state.showValue);//展示输入框的内容
+	}
+	
+	onSelectLeftItem(item){
+        this.setState({curLeftSelectType:item.type});
+	}
+
+	onSelectRightItem(item){
+        alert('onSelectRightItem' + item.key);
+	}
+
+	renderStatusBar() {
+		return (
+			<StatusBar
+				barStyle={Theme.barStyle}
+				backgroundColor={Theme.primary}
+			/>)
+	}
+
+	renderSearchInput() {
+		return (
+			<View style={[styles.searchTextInput]}>
+				<SearchTextInput {...this.props} height={30} searchRef="searchTextInput" onChangeText={this._onChangeText.bind(this)} />
+				<TouchableOpacity onPress={this.showData.bind(this)}>
+					<Text style={styles.searchBtn}>搜索</Text>
+				</TouchableOpacity>
+			</View>)
+	}
+	
+	renderLeftItem(item) {
+		return (
+			<ClassifyLeftItem 
+				onSelect={this.onSelectLeftItem.bind(this, item)}
+				isSelect={this.state.curLeftSelectType==item.type}
+				data={item}
+				text={item.key}
+			/>
+		)
+	}
+
+	renderLeftScrollView() {
+		return (
+		<FlatList
+			keyboardDismissMode='on-drag' // 拖动界面输入法退出
+			keyboardShouldPersistTaps='never'
+			data={this.state.leftDataSource}
+			extraData={this.state}
+			renderItem={({item}) => this.renderLeftItem(item)}
+		/>
+		)
+	}
+
+	renderRightScrollView() {
+		return (
+		<ClassifyRightPage data={this.state.rightDataSource[this.state.curLeftSelectType]}/>
+		)
+	}
+
 	render() {
 		return (
 		<View style={styles.container}>
 			<View style={styles.title}>
-				<StatusBar
-					barStyle={Theme.barStyle}
-					backgroundColor={Theme.primary}
-				/>
-				<View style={[styles.searchTextInput]}>
-					<SearchTextInput height={30} onChangeText={this._onChangeText.bind(this)} />
-					<TouchableOpacity onPress={this.showData.bind(this)}>
-						<View style={styles.btn}>
-							<Text style={styles.wordC}>搜索</Text>
-						</View>
-					</TouchableOpacity>
+				{ this.renderStatusBar() }
+				{ this.renderSearchInput() }
+			</View>
+				
+			<View style={styles.scrollContent}>
+				<View style={styles.scrollLeft}>
+					{ this.renderLeftScrollView() }
+				</View>
+				<View style={styles.scrollRight}>
+					{ this.renderRightScrollView() }
 				</View>
 			</View>
-
-			
 
 		</View>
 		);
@@ -85,18 +148,30 @@ const styles = StyleSheet.create({
 		height: 40,
 		textAlign:'center',
 	},
-    btn:{
-        width:50,
-        height:30,
-        justifyContent:"center",
-        alignItems:"center",
-        // borderRadius:5
-        borderWidth:0,
-        marginLeft:-1,
-    },
-    wordC:{
-        color:"#4876FF",
-        fontSize:15,
-    }
-
+	searchBtn:{
+		color:"#4876FF",
+		fontSize:15,
+		width:50,
+		textAlign:'center',
+	},
+	scrollContent:{
+		flex: 1,
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
+		backgroundColor: Theme.primary,
+		flexDirection: 'row',
+	},
+	scrollLeft:{
+		backgroundColor: "#FFFFFF",
+		width:100,
+	},
+	scrollRight:{
+		backgroundColor:Theme.paper,
+		width:width-100,
+	},
+	itemRight:{
+		backgroundColor: "#FFFFFF",
+		width:width-100,
+		height: 40,
+	},
 });

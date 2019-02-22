@@ -18,7 +18,8 @@ export default class SearchTextInput extends Component
         width: PropTypes.number,
         height: PropTypes.number,
         iconSize: PropTypes.number,
-        placeholder: PropTypes.string,
+		placeholder: PropTypes.string,
+		searchRef: PropTypes.string,
         onChangeText: PropTypes.func.isRequired,
     };
 
@@ -26,6 +27,7 @@ export default class SearchTextInput extends Component
 		width: width - 60,
 		height:40,
 		iconSize:26,
+		searchRef:"",
 		placeholder:"在这里输入搜索内容",
     };
 
@@ -35,7 +37,7 @@ export default class SearchTextInput extends Component
 				width: this.props.width,
 				height:this.props.height,
 				borderColor:"#ebebeb",
-				backgroundColor:"#F5F5F5",
+				backgroundColor:"white",
 				borderWidth:1,
 				marginLeft:10,
 				borderRadius:20,
@@ -52,6 +54,7 @@ export default class SearchTextInput extends Component
 				<TextInput
 					placeholder={this.props.placeholder}
 					returnKeyType ="done"
+					ref={this.props.searchRef}
 					style={{
 						width: this.props.width - 50,
 						height:this.props.height,
