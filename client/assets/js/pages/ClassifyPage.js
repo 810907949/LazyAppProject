@@ -23,6 +23,7 @@ import Datum from '../config/Datum';
 import SearchTextInput from '../components/SearchTextInput';
 import ClassifyLeftItem from './ClassifyLeftItem';
 import ClassifyRightPage from './ClassifyRightPage';
+import NetMgr from '../managers/NetMgr';
 
 
 // 取得屏幕的宽高Dimensions
@@ -37,7 +38,16 @@ export default class ClassifyPage extends Component {
 			leftDataSource: Datum.classifyTypes,
 			rightDataSource: Datum.classifyTypeDatas,
 			curLeftSelectType:1,
-        }
+		}
+		
+		let url = "http://39.107.235.229:8080/app/goods/list?keyword=%E5%9B%9B%E4%BB%B6&page=1"
+		let data = {
+			keyword:"四件",
+			page:1
+		}
+		NetMgr.request(url, data, (responseStr)=>{
+			console.log("data =============== ", responseStr.data.count)
+		})
     }
 
 	_onChangeText(inputData){
@@ -163,15 +173,15 @@ const styles = StyleSheet.create({
 	},
 	scrollLeft:{
 		backgroundColor: "#FFFFFF",
-		width:100,
+		width:80,
 	},
 	scrollRight:{
 		backgroundColor:Theme.paper,
-		width:width-100,
+		width:width-80,
 	},
 	itemRight:{
 		backgroundColor: "#FFFFFF",
-		width:width-100,
+		width:width-80,
 		height: 40,
 	},
 });

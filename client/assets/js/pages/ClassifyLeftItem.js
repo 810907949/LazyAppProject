@@ -35,8 +35,8 @@ export default class ClassifyLeftItem extends Component {
 const styles = StyleSheet.create({
 	selected:{
 		fontSize:20,
-		width:100,
-		height: 50,
+		width:80,
+		height: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: "#FFFFFF",
@@ -44,21 +44,21 @@ const styles = StyleSheet.create({
 	},
 	unSelect:{
 		fontSize:15,
-		width:100,
-		height: 50,
+		width:80,
+		height: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: "#F5F5F5",
 		marginBottom: 2,
 	},
 	textSelected:{
-		fontWeight:'bold',
-		fontSize:15,
+		fontWeight:'normal',
+		fontSize:12,
 		color:"red"
 	},
 	textUnSelect:{
 		fontWeight:'normal',
-		fontSize:15,
+		fontSize:12,
 		color:"#555555"
 	},
 });

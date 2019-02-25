@@ -10,6 +10,7 @@ import {
   Text,
   Animated,
   Easing,
+  View,
 } from 'react-native';
 import {createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -28,12 +29,14 @@ const MainStack = createBottomTabNavigator(   //二级路由
 		{ 
 			screen: FirstPage,
 			navigationOptions:({navigation}) => ({  
-				tabBarLabel:'首页',  
+				tabBarLabel:({focused,tintColor}) => (  
+					<Text style={[styles.tabBarLabel, {color: tintColor}]}>首页</Text>
+				)  , 
 				tabBarIcon:({focused,tintColor}) => (  
 					<Icon 
                     name={focused ? 'ios-home' : 'ios-home'}
-                    size={26}
-                    style={{color: tintColor}}
+                    size={24}
+                    style={[styles.tabBarIcon, {color: tintColor}]}
 					/> 
 				)  
 			}),  
@@ -42,12 +45,14 @@ const MainStack = createBottomTabNavigator(   //二级路由
 		{ 
 			screen: ClassifyPage,
 			navigationOptions:({navigation}) => ({  
-				tabBarLabel:'分类',  
+				tabBarLabel:({focused,tintColor}) => (  
+					<Text style={[styles.tabBarLabel, {color: tintColor}]}>分类</Text>
+				)  ,  
 				tabBarIcon:({focused,tintColor}) => (  
 					<Icon 
-                    name={focused ? 'ios-paper' : 'ios-paper'}
-                    size={26}
-                    style={{color: tintColor}}
+                    name={focused ? 'ios-list-box' : 'ios-list-box'}
+                    size={24}
+                    style={[styles.tabBarIcon, {color: tintColor}]}
 					/> 
 				)  
 			}),  
@@ -56,12 +61,14 @@ const MainStack = createBottomTabNavigator(   //二级路由
 		{ 
 			screen: FindPage,
 			navigationOptions:({navigation}) => ({  
-				tabBarLabel:'发现',  
+				tabBarLabel:({focused,tintColor}) => (  
+					<Text style={[styles.tabBarLabel, {color: tintColor}]}>发现</Text>
+				)  , 
 				tabBarIcon:({focused,tintColor}) => (  
 					<Icon 
-                    name={focused ? 'ios-search' : 'ios-search'}
-                    size={26}
-                    style={{color: tintColor}}
+                    name={focused ? 'ios-send' : 'ios-send'}
+                    size={24}
+                    style={[styles.tabBarIcon, {color: tintColor}]}
 					/> 
 				)  
 			}),  
@@ -70,12 +77,14 @@ const MainStack = createBottomTabNavigator(   //二级路由
 		{
 			screen: UserPage,
 			navigationOptions:({navigation}) => ({  
-				tabBarLabel:'用户',  
+				tabBarLabel:({focused,tintColor}) => (  
+					<Text style={[styles.tabBarLabel, {color: tintColor}]}>用户</Text>
+				),
 				tabBarIcon:({focused,tintColor}) => ( 
 					<Icon 
                     name={focused ? 'ios-person' : 'ios-person'}
-                    size={26}
-                    style={{color: tintColor}}
+                    size={24}
+                    style={[styles.tabBarIcon, {color: tintColor}]}
 					/> 
 				)  
 			}),  
@@ -94,6 +103,8 @@ const MainStack = createBottomTabNavigator(   //二级路由
 				borderTopColor:'#ebebeb',
 				borderTopWidth:1,
 				backgroundColor:'white',
+				justifyContent: 'center',
+				alignItems: 'center',
 			}
 		},
 	}
@@ -161,6 +172,17 @@ const RootStack = createStackNavigator(   //根路由
 	}
   );
 
+
+const styles = StyleSheet.create({
+	tabBarLabel: {
+		fontSize:9,
+		textAlign:'center',
+		top:-6
+	},
+	tabBarIcon: {
+		bottom:-2
+	},
+});
 
 const App = createAppContainer(RootStack)
 export default App

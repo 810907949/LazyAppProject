@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
-  FlatList
+  Image,
+  FlatList,
+  View
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -18,14 +19,17 @@ export default class ClassifyRightPage extends Component {
 		data: PropTypes.array,
     };
 
-	shouldComponentUpdate(nextProps,nextState){
-		return (this.props.data != nextProps.data);
-	}
+	// shouldComponentUpdate(nextProps,nextState){
+	// 	return (this.props.data != nextProps.data);
+	// }
 	
 	renderItem(item) {
 		return (
-			<Text>{item.key}</Text>
-			// <ClassifyRightItem data={item}/>
+			<View>
+				<Image source={{uri: 'http://www.cheam.top:7000/test1.png'}}
+					style={{width: 200, height: 200}}></Image>
+				<Text>{item.key}</Text>
+			</View>
 		)
 	}
 
