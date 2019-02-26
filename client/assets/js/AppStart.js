@@ -22,6 +22,8 @@ import FindPage from './pages/FindPage';
 import UserPage from './pages/UserPage';
 import SettingPage from './pages/SettingPage';
 import LoginPage from './pages/LoginPage';
+import SearchPage from './pages/SearchPage';
+
 
 const MainStack = createBottomTabNavigator(   //二级路由
 	{
@@ -132,6 +134,13 @@ const RootStack = createStackNavigator(   //根路由
 			screen: LoginPage ,
 			navigationOptions:({navigation}) => ({  
 				title:"登录",
+			})
+		},
+		Search:
+		{ 
+			screen: SearchPage ,
+			navigationOptions:({navigation}) => ({  
+				header:null,
 			})
 		},
 	},

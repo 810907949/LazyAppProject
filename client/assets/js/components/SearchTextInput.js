@@ -4,7 +4,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {View, TextInput, Dimensions} from 'react-native';
+import {View, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
@@ -20,16 +20,71 @@ export default class SearchTextInput extends Component
         iconSize: PropTypes.number,
 		placeholder: PropTypes.string,
 		searchRef: PropTypes.string,
-        onChangeText: PropTypes.func.isRequired,
+		editable: PropTypes.bool,
+		autoFocus: PropTypes.bool,
+        onChangeText: PropTypes.func,
+		onSubmit: PropTypes.func,
+		returnKeyType: PropTypes.string,
+		value:PropTypes.string,
     };
 
     static defaultProps = {
 		width: width - 60,
 		height:40,
 		iconSize:26,
-		searchRef:"",
+		searchRef:"searchRef",
+		editable:true,
+		autoFocus:false,
 		placeholder:"在这里输入搜索内容",
-    };
+		returnKeyType:"done",
+	};
+	
+	constructor(props){
+        super(props);
+        this.state = {
+			value:"",
+		}
+    }
+	
+	shouldComponentUpdate(nextProps,nextState){
+		return (this.state.value != nextState.value);
+	}
+
+	onChangeText(inputData)
+	{
+		this.setState({value:inputData});
+		if(this.props.onChangeText)
+		{
+			this.props.onChangeText(inputData);
+		}
+	}
+
+	onClickCancel()
+	{
+		let input = this.refs[this.props.searchRef];
+		if(input)
+		{
+			input.clear();
+			this.setState({value:""});
+		}
+	}
+
+	renderCancelBtn()
+	{
+		if(this.state.value != "")
+		{
+			return(
+			<TouchableOpacity onPress={this.onClickCancel.bind(this)}>
+				<Icon 
+					name={'ios-close-circle'}
+					size={20}
+					style={{
+						color: "#C2C2C2"
+					}}
+				/>	
+			</TouchableOpacity>)
+		}
+	}
 
     render() {
         return (
@@ -53,18 +108,23 @@ export default class SearchTextInput extends Component
 				/>
 				<TextInput
 					placeholder={this.props.placeholder}
-					returnKeyType ="done"
+					returnKeyType ={this.props.returnKeyType}
+					editable={this.props.editable}
+					autoFocus={this.props.autoFocus}
 					ref={this.props.searchRef}
 					style={{
-						width: this.props.width - 50,
+						width: this.props.width - 65,
 						height:this.props.height,
 						borderWidth:0,
 						marginLeft:5,
 						paddingVertical: 0,
 					}}//input框的基本样式
-					onChangeText={this.props.onChangeText}//输入框改变触发的函数
-				>
-				</TextInput>
+					onChangeText={this.onChangeText.bind(this)}//输入框改变触发的函数
+					onSubmitEditing={this.props.onSubmit}
+				/>
+				{
+					this.renderCancelBtn()
+				}
 			</View>
 		);
 	}

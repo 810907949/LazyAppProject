@@ -32,7 +32,6 @@ const { width, height } = Dimensions.get('window');
 export default class ClassifyPage extends Component {
 	constructor(props){
         super(props);
-        this._onChangeText = this._onChangeText.bind(this);
         this.state = {
 			showValue:"",
 			leftDataSource: Datum.classifyTypes,
@@ -40,7 +39,7 @@ export default class ClassifyPage extends Component {
 			curLeftSelectType:1,
 		}
 		
-		let url = "http://39.107.235.229:8080/app/goods/list?keyword=%E5%9B%9B%E4%BB%B6&page=1"
+		let url = "http://www.cheam.top:8080/app/goods/list?keyword=%E5%9B%9B%E4%BB%B6&page=1"
 		let data = {
 			keyword:"四件",
 			page:1
@@ -50,16 +49,6 @@ export default class ClassifyPage extends Component {
 		})
     }
 
-	_onChangeText(inputData){
-        //把获取到的内容，设置给showValue
-        this.setState({showValue:inputData});
-	}
-	
-	showData(){
-		Keyboard.dismiss();
-		alert(this.state.showValue);//展示输入框的内容
-	}
-	
 	onSelectLeftItem(item){
         this.setState({curLeftSelectType:item.type});
 	}
@@ -79,9 +68,8 @@ export default class ClassifyPage extends Component {
 	renderSearchInput() {
 		return (
 			<View style={[styles.searchTextInput]}>
-				<SearchTextInput {...this.props} height={30} searchRef="searchTextInput" onChangeText={this._onChangeText.bind(this)} />
-				<TouchableOpacity onPress={this.showData.bind(this)}>
-					<Text style={styles.searchBtn}>搜索</Text>
+				<TouchableOpacity onPress={()=>this.props.navigation.navigate('Search')}>
+					<SearchTextInput {...this.props} width={width-15} height={30} searchRef="searchTextInput" placeholder="四件套" editable={false} />
 				</TouchableOpacity>
 			</View>)
 	}

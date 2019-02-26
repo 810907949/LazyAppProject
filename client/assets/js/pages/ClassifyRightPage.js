@@ -6,10 +6,12 @@ import {
   Text,
   Image,
   FlatList,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import PropTypes from 'prop-types';
+const { width, height } = Dimensions.get('window');
 
 // import ClassifyRightItem from './ClassifyRightItem';
 
@@ -19,15 +21,15 @@ export default class ClassifyRightPage extends Component {
 		data: PropTypes.array,
     };
 
-	// shouldComponentUpdate(nextProps,nextState){
-	// 	return (this.props.data != nextProps.data);
-	// }
+	shouldComponentUpdate(nextProps,nextState){
+		return (this.props.data != nextProps.data);
+	}
 	
 	renderItem(item) {
 		return (
-			<View>
+			<View style={{marginLeft:2, marginTop:5}}>
 				<Image source={{uri: 'http://www.cheam.top:7000/test1.png'}}
-					style={{width: 200, height: 200}}></Image>
+					style={{width: (width-90)/2, height: 200}}></Image>
 				<Text>{item.key}</Text>
 			</View>
 		)
@@ -39,6 +41,7 @@ export default class ClassifyRightPage extends Component {
 			data={this.props.data}
 			extraData={this.state}
 			style={styles.container}
+			numColumns={2}
 			renderItem={({item}) => this.renderItem(item)}
 		/>
 		)
