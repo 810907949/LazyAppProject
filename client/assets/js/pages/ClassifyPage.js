@@ -19,11 +19,10 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Theme from '../config/Theme';
-import Datum from '../config/Datum';
 import SearchTextInput from '../components/SearchTextInput';
 import ClassifyLeftItem from './ClassifyLeftItem';
 import ClassifyRightPage from './ClassifyRightPage';
-import NetMgr from '../managers/NetMgr';
+import DataMgr from '../managers/DataMgr';
 
 
 // 取得屏幕的宽高Dimensions
@@ -34,23 +33,26 @@ export default class ClassifyPage extends Component {
         super(props);
         this.state = {
 			showValue:"",
-			leftDataSource: Datum.classifyTypes,
-			rightDataSource: Datum.classifyTypeDatas,
-			curLeftSelectType:1,
+			categoryList: [],
+			categoryDetails: {},
+			curSelectIndex: 0,
 		}
 		
-		let url = "http://www.cheam.top:8080/app/goods/list?keyword=%E5%9B%9B%E4%BB%B6&page=1"
-		let data = {
-			keyword:"四件",
-			page:1
-		}
-		NetMgr.request(url, data, (responseStr)=>{
-			console.log("data =============== ", responseStr.data.count)
+		DataMgr.getCategoryAll((responseStr)=>{
+			console.log("data =============== ", responseStr)
+			this.setState({
+				categoryList: responseStr.data.categoryList,
+				categoryDetails: responseStr.data.allList,
+			});
 		})
-    }
+	}
 
-	onSelectLeftItem(item){
-        this.setState({curLeftSelectType:item.type});
+	onSelectLeftItem(index){
+		if(index == this.state.curSelectIndex)
+			return
+
+		this.refs.rightPage.resetScrollView();
+		this.setState({curSelectIndex:index});
 	}
 
 	onSelectRightItem(item){
@@ -69,18 +71,19 @@ export default class ClassifyPage extends Component {
 		return (
 			<View style={[styles.searchTextInput]}>
 				<TouchableOpacity onPress={()=>this.props.navigation.navigate('Search')}>
-					<SearchTextInput {...this.props} width={width-15} height={30} searchRef="searchTextInput" placeholder="四件套" editable={false} />
+					<SearchTextInput {...this.props} width={width-15} height={30} searchRef="searchTextInput" placeholder="沃生" editable={false} />
 				</TouchableOpacity>
 			</View>)
 	}
 	
-	renderLeftItem(item) {
+	renderLeftItem(item, index) {
+		console.log("renderLeftItem === item == " + item + "   index == " + index)
 		return (
 			<ClassifyLeftItem 
-				onSelect={this.onSelectLeftItem.bind(this, item)}
-				isSelect={this.state.curLeftSelectType==item.type}
+				onSelect={this.onSelectLeftItem.bind(this, index)}
+				isSelect={this.state.curSelectIndex==index}
 				data={item}
-				text={item.key}
+				text={item.name}
 			/>
 		)
 	}
@@ -90,16 +93,23 @@ export default class ClassifyPage extends Component {
 		<FlatList
 			keyboardDismissMode='on-drag' // 拖动界面输入法退出
 			keyboardShouldPersistTaps='never'
-			data={this.state.leftDataSource}
+			data={this.state.categoryList}
 			extraData={this.state}
-			renderItem={({item}) => this.renderLeftItem(item)}
+			keyExtractor ={(item, index) => index.toString()}
+			renderItem={({item, index}) => this.renderLeftItem(item, index)}
 		/>
 		)
 	}
 
 	renderRightScrollView() {
+		if(this.state.categoryList.length == 0)
+			return
+
 		return (
-		<ClassifyRightPage data={this.state.rightDataSource[this.state.curLeftSelectType]}/>
+			<ClassifyRightPage 
+				ref={"rightPage"}
+				data={this.state.categoryDetails[this.state.categoryList[this.state.curSelectIndex].id]}
+			/>
 		)
 	}
 

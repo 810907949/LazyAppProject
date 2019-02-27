@@ -30,18 +30,24 @@ export default class ClassifyRightPage extends Component {
 			<View style={{marginLeft:2, marginTop:5}}>
 				<Image source={{uri: 'http://www.cheam.top:7000/test1.png'}}
 					style={{width: (width-90)/2, height: 200}}></Image>
-				<Text>{item.key}</Text>
+				<Text>{item.name}</Text>
 			</View>
 		)
+	}
+
+	resetScrollView(){
+		this.refs.scrollView.scrollToIndex({index:0,animated:true})
 	}
 
 	render() {
 		return (
 		<FlatList
+			ref={"scrollView"}
 			data={this.props.data}
 			extraData={this.state}
 			style={styles.container}
 			numColumns={2}
+			keyExtractor ={(item, index) => index.toString()}
 			renderItem={({item}) => this.renderItem(item)}
 		/>
 		)

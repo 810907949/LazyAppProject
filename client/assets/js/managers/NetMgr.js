@@ -10,19 +10,28 @@ import React, {
 
 export default class NetMgr
 {
-	static request(url, data, callback) {
-		// var fetchOptions = {
-		// 	method: 'POST',
-		// 	headers: {
-		// 	'Accept': 'application/json',
-		// 	'Content-Type': 'application/x-www-form-urlencoded'
-		// 	},
-		// 	body:'data='+data+''//这里我参数只有一个data,大家可以还有更多的参数
-		// };
-		// fetch(url, fetchOptions)
+	static post(url, data, callback) {
+		var fetchOptions = {
+			method: 'POST',
+			headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+			},
+			body:JSON.stringify(data)
+		};
+		fetch(url, fetchOptions)
+		.then((response) => response.text())
+		.then((responseText) => {
+			console.log("post url == ", responseText);
+			callback(JSON.parse(responseText));
+		}).done();
+	}
+	
+	static get(url, callback) {
 		fetch(url)
 		.then((response) => response.text())
 		.then((responseText) => {
+			console.log("get url == ", responseText);
 			callback(JSON.parse(responseText));
 		}).done();
 	}

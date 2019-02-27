@@ -18,7 +18,7 @@ import Theme from '../config/Theme';
 const { width, height } = Dimensions.get('window');
 import SearchTextInput from '../components/SearchTextInput';
 import Icon from 'react-native-vector-icons/Ionicons';
-import NetMgr from '../managers/NetMgr';
+import DataMgr from '../managers/DataMgr';
 
 export default class SearchPage extends Component {
 
@@ -26,7 +26,7 @@ export default class SearchPage extends Component {
         super(props);
         this.state = {
 			showValue:"",
-			defaultSearchValue:"四件套",
+			defaultSearchValue:"沃生",
 			showData:[],
 		}
 
@@ -73,8 +73,8 @@ export default class SearchPage extends Component {
 		}
 
 		Keyboard.dismiss();
-		let url = "http://www.cheam.top:8080/app/goods/list?keyword=" + searchValue + "&page=1"
-		NetMgr.request(url, {}, (responseStr)=>{
+		DataMgr.getGoodList({ keyword:searchValue, sort:"retail_price", order: "desc"}, (responseStr)=>{
+			console.log("getGoodList =========== " + responseStr)
 			if (responseStr.data.goodsList.length == 0)
 			{
 				alert("没有符合您要求的商品");
@@ -129,9 +129,9 @@ export default class SearchPage extends Component {
 
 	renderSubItem({item, index}){
 		return (
-			<TouchableOpacity  onPress={()=>{this.onClickItem(item)}}>
+			<TouchableOpacity activeOpacity={0.5} onPress={()=>{this.onClickItem(item)}}>
 				<View style={{flexDirection: 'row', width: width, marginTop: 5}}>
-						<Image source={{uri: 'http://www.cheam.top:7000/test1.png'}}
+						<Image source={{uri: item.picUrl}}
 							style={{width: 120, height: 120}}></Image>
 						<View>
 							<Text style={styles.itemName}>{item.name}</Text>
@@ -205,7 +205,8 @@ const styles = StyleSheet.create({
 	itemName:{
 		left:10,
 		color:"#000000",
-		fontSize:15,
+		fontSize:14,
+		width:width-140,
 	},
 	itemBrief:{
 		left:10,
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
 	},
 	itemRetailPrice:{
 		left:10,
-		top:55,
+		top:45,
 		color:"#FF0000",
 		fontSize:17,
 	},
