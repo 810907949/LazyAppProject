@@ -71,7 +71,7 @@ export default class ClassifyPage extends Component {
 		return (
 			<View style={[styles.searchTextInput]}>
 				<TouchableOpacity onPress={()=>this.props.navigation.navigate('Search')}>
-					<SearchTextInput {...this.props} width={width-15} height={30} searchRef="searchTextInput" placeholder="沃生" editable={false} />
+					<SearchTextInput {...this.props} width={width-15} height={30} searchRef="searchTextInput" placeholder="搜索店内宝贝" editable={false} />
 				</TouchableOpacity>
 			</View>)
 	}

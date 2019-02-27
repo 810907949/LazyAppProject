@@ -3,3 +3,4 @@ React Native 启动页： https://blog.csdn.net/huxinguang_ios/article/details/7
 react-native-vector-icons图标对应库：https://oblador.github.io/react-native-vector-icons/
 react-native-vector-icons图标使用方法：https://blog.csdn.net/luolin2611/article/details/80998294
 React Native 第三方插件: https://blog.csdn.net/chichengjunma/article/details/52920137
+react-native头部渐变色：https://www.jianshu.com/p/f767d05708ff

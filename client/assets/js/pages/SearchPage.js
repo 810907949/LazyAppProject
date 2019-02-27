@@ -130,9 +130,9 @@ export default class SearchPage extends Component {
 	renderSubItem({item, index}){
 		return (
 			<TouchableOpacity activeOpacity={0.5} onPress={()=>{this.onClickItem(item)}}>
-				<View style={{flexDirection: 'row', width: width, marginTop: 5}}>
+				<View style={{flexDirection: 'row', width: width-10, marginTop: 5, backgroundColor:"white",borderRadius: 10}}>
 						<Image source={{uri: item.picUrl}}
-							style={{width: 120, height: 120}}></Image>
+							style={{width: 120, height: 120,borderTopLeftRadius: 10,borderBottomLeftRadius: 10}}></Image>
 						<View>
 							<Text style={styles.itemName}>{item.name}</Text>
 							<Text style={styles.itemBrief}>{item.brief}</Text>
@@ -144,8 +144,8 @@ export default class SearchPage extends Component {
 	}
 	
 	_separator = () => {
-        return <View style={{height:1,backgroundColor:'#F5F5F5', left: 125, top: 2}}/>;
-    }
+		return <View style={{height:1,backgroundColor:'#F5F5F5', left: 125, top: 2}}/>;
+	}
 
 	render() {
 		return (
@@ -159,7 +159,7 @@ export default class SearchPage extends Component {
 					numColumns={1}
 					keyExtractor ={(item, index) => index.toString()}
 					renderItem={this.renderSubItem.bind(this)}
-					ItemSeparatorComponent={this._separator}
+					// ItemSeparatorComponent={this._separator}
 					// ListEmptyComponent={this.emptyComponent}
 				/>
 			</View>
@@ -185,11 +185,12 @@ const styles = StyleSheet.create({
 	},
 	scrollView: {
 		flex: 1,
-		left:5,
+		marginLeft:5,
+		marginRight:5,
 		marginTop: 5,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		backgroundColor: Theme.paper,
+		backgroundColor: Theme.primary,
 		width:width,
 		marginBottom: 5
 	},
