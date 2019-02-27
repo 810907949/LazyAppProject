@@ -2,12 +2,17 @@
 
 启动Logo
 
-![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/QQ%E6%88%AA%E5%9B%BE20190220174617.jpg)
+![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/Screenshot_20190226-175120.png)
 
-主页
+分类
 
-![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/QQ%E6%88%AA%E5%9B%BE20190220174535.jpg)
+![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/Screenshot_20190226-174938.png)
 
-用户->登录
+搜索
 
-![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/QQ%E6%88%AA%E5%9B%BE20190220174603.jpg)
+![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/Screenshot_20190226-174954.png)
+
+
+发现
+
+![Alt text](https://github.com/810907949/LazyAppProject/blob/master/Screenshots/Screenshot_20190226-175009.png)
