@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
+  Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
   TextInput,
@@ -14,7 +14,7 @@ import {
   Dimensions,
   FlatList,
   SectionList,
-  Keyboard
+  Keyboard,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -24,6 +24,7 @@ import ClassifyLeftItem from './ClassifyLeftItem';
 import ClassifyRightPage from './ClassifyRightPage';
 import DataMgr from '../managers/DataMgr';
 
+import LinearGradient from 'react-native-linear-gradient';
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
@@ -116,8 +117,16 @@ export default class ClassifyPage extends Component {
 	render() {
 		return (
 		<View style={styles.container}>
+			<LinearGradient colors={['#008B8B', '#66CDAA', '#FFFFFF']}
+				style={{width: width, height: height/2,
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					right: 0,}}>
+			</LinearGradient>
+
 			<View style={styles.title}>
-				{ this.renderStatusBar() }
+				{/* { this.renderStatusBar() } */}
 				{ this.renderSearchInput() }
 			</View>
 				
@@ -151,10 +160,11 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize:25,
-		backgroundColor: Theme.primary,
+		// backgroundColor: Theme.primary,
 		width: width,
 		height: 40,
 		textAlign:'center',
+		marginTop:30,
 	},
 	searchBtn:{
 		color:"#4876FF",
@@ -166,15 +176,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		backgroundColor: Theme.primary,
+		backgroundColor: "#FFFFFF00",
 		flexDirection: 'row',
 	},
 	scrollLeft:{
-		backgroundColor: "#FFFFFF",
 		width:80,
 	},
 	scrollRight:{
-		backgroundColor:Theme.paper,
 		width:width-80,
 	},
 	itemRight:{
