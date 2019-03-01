@@ -11,9 +11,10 @@ import {
   Animated,
   Easing,
   View,
+  Image
 } from 'react-native';
 import {createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Theme from './config/Theme';
 import FirstPage from './pages/FirstPage';
@@ -23,9 +24,10 @@ import UserPage from './pages/UserPage';
 import SettingPage from './pages/SettingPage';
 import LoginPage from './pages/LoginPage';
 import SearchPage from './pages/SearchPage';
+import GiftPage from './pages/GiftPage';
+import AllGoodsPage from './pages/AllGoodsPage';
 
-
-const MainStack = createBottomTabNavigator(   //二级路由
+const MainStack = createBottomTabNavigator(
 	{
 		First: 
 		{ 
@@ -35,11 +37,10 @@ const MainStack = createBottomTabNavigator(   //二级路由
 					<Text style={[styles.tabBarLabel, {color: tintColor}]}>首页</Text>
 				)  , 
 				tabBarIcon:({focused,tintColor}) => (  
-					<Icon 
-                    name={focused ? 'ios-home' : 'ios-home'}
-                    size={24}
-                    style={[styles.tabBarIcon, {color: tintColor}]}
-					/> 
+					<Image 
+						source={focused ? require("../res/index/mainB.png") : require("../res/index/main.png")}
+						style={[styles.tabBarIcon]}
+					/>
 				)  
 			}),  
 		},
@@ -51,30 +52,60 @@ const MainStack = createBottomTabNavigator(   //二级路由
 					<Text style={[styles.tabBarLabel, {color: tintColor}]}>分类</Text>
 				)  ,  
 				tabBarIcon:({focused,tintColor}) => (  
-					<Icon 
-                    name={focused ? 'ios-list-box' : 'ios-list-box'}
-                    size={24}
-                    style={[styles.tabBarIcon, {color: tintColor}]}
-					/> 
+					<Image 
+						source={focused ? require("../res/index/classB.png") : require("../res/index/class.png")}
+						style={[styles.tabBarIcon]}
+					/>
 				)  
 			}),  
 		},
-		Find: 
-		{ 
-			screen: FindPage,
+		Gift:
+		{
+			screen: GiftPage,
 			navigationOptions:({navigation}) => ({  
 				tabBarLabel:({focused,tintColor}) => (  
-					<Text style={[styles.tabBarLabel, {color: tintColor}]}>发现</Text>
+					<Text style={[styles.tabBarLabel, {color: tintColor}]}>礼品系列</Text>
 				)  , 
 				tabBarIcon:({focused,tintColor}) => (  
-					<Icon 
-                    name={focused ? 'ios-send' : 'ios-send'}
-                    size={24}
-                    style={[styles.tabBarIcon, {color: tintColor}]}
-					/> 
+					<Image 
+						source={focused ? require("../res/index/articleB.png") : require("../res/index/article.png")}
+						style={[styles.tabBarIcon]}
+					/>
 				)  
 			}),  
 		},
+		All:
+		{
+			screen: AllGoodsPage,
+			navigationOptions:({navigation}) => ({  
+				tabBarLabel:({focused,tintColor}) => (  
+					<Text style={[styles.tabBarLabel, {color: tintColor}]}>全部宝贝</Text>
+				)  , 
+				tabBarIcon:({focused,tintColor}) => (  
+					<Image 
+						source={focused ? require("../res/index/snsB.png") : require("../res/index/sns.png")}
+						style={[styles.tabBarIcon]}
+					/>
+				)  
+			}),  
+		},
+		
+		// Find: 
+		// { 
+		// 	screen: FindPage,
+		// 	navigationOptions:({navigation}) => ({  
+		// 		tabBarLabel:({focused,tintColor}) => (  
+		// 			<Text style={[styles.tabBarLabel, {color: tintColor}]}>发现</Text>
+		// 		)  , 
+		// 		tabBarIcon:({focused,tintColor}) => (  
+		// 			<Icon 
+        //             name={focused ? 'ios-send' : 'ios-send'}
+        //             size={24}
+        //             style={[styles.tabBarIcon, {color: tintColor}]}
+		// 			/> 
+		// 		)  
+		// 	}),  
+		// },
 		User: 
 		{
 			screen: UserPage,
@@ -83,11 +114,10 @@ const MainStack = createBottomTabNavigator(   //二级路由
 					<Text style={[styles.tabBarLabel, {color: tintColor}]}>用户</Text>
 				),
 				tabBarIcon:({focused,tintColor}) => ( 
-					<Icon 
-                    name={focused ? 'ios-person' : 'ios-person'}
-                    size={24}
-                    style={[styles.tabBarIcon, {color: tintColor}]}
-					/> 
+					<Image 
+						source={focused ? require("../res/index/myB.png") : require("../res/index/my.png")}
+						style={[styles.tabBarIcon]}
+					/>
 				)  
 			}),  
 		},
@@ -97,13 +127,12 @@ const MainStack = createBottomTabNavigator(   //二级路由
 		animationEnabled: true,
 		swipeEnabled: true,
 		tabBarOptions: {
-			activeTintColor: Theme.primarySelected,
-			inactiveTintColor: 'black',
-			// activeBackgroundColor: "",
-			// inactiveBackgroundColor: "",
+			activeTintColor: "#00AF8D",
+			inactiveTintColor: '#444444',
 			style :{
 				borderTopColor:'#ebebeb',
 				borderTopWidth:1,
+				height:53,
 				backgroundColor:'white',
 				justifyContent: 'center',
 				alignItems: 'center',
@@ -184,12 +213,12 @@ const RootStack = createStackNavigator(   //根路由
 
 const styles = StyleSheet.create({
 	tabBarLabel: {
-		fontSize:9,
+		fontSize:11,
 		textAlign:'center',
-		top:-6
+		top:-4
 	},
 	tabBarIcon: {
-		bottom:-2
+		bottom:0,
 	},
 });
 

@@ -106,10 +106,12 @@ export default class ClassifyPage extends Component {
 		if(this.state.categoryList.length == 0)
 			return
 
+		let categoryData = this.state.categoryList[this.state.curSelectIndex]
 		return (
 			<ClassifyRightPage 
 				ref={"rightPage"}
-				data={this.state.categoryDetails[this.state.categoryList[this.state.curSelectIndex].id]}
+				data={this.state.categoryDetails[categoryData.id]}
+				picUrl={categoryData.picUrl}
 			/>
 		)
 	}
@@ -117,13 +119,21 @@ export default class ClassifyPage extends Component {
 	render() {
 		return (
 		<View style={styles.container}>
-			<LinearGradient colors={['#008B8B', '#66CDAA', '#FFFFFF']}
+			{/* <LinearGradient colors={['#008B8B', '#66CDAA', '#FFFFFF']}
 				style={{width: width, height: height/2,
 					position: 'absolute',
 					top: 0,
 					left: 0,
 					right: 0,}}>
-			</LinearGradient>
+			</LinearGradient> */}
+			<Image style={{width: width, height: height/2,
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,}}
+					>
+			</Image>
 
 			<View style={styles.title}>
 				{/* { this.renderStatusBar() } */}
@@ -181,9 +191,12 @@ const styles = StyleSheet.create({
 	},
 	scrollLeft:{
 		width:80,
+		borderRightColor:'#ebebeb',
+		borderRightWidth:1,
 	},
 	scrollRight:{
 		width:width-80,
+		marginTop:5,
 	},
 	itemRight:{
 		backgroundColor: "#FFFFFF",

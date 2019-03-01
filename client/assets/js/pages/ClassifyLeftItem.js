@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
 	},
 	textSelected:{
 		fontWeight:'normal',
-		fontSize:12,
+		fontSize:14,
 		color:"red"
 	},
 	textUnSelect:{
 		fontWeight:'normal',
-		fontSize:12,
-		color:"#555555"
+		fontSize:14,
+		color:"#444444"
 	},
 });

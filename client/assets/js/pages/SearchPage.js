@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start',
 		backgroundColor: Theme.primary,
 		width: width,
+		marginTop: 25,
 	},
 	searchTextInput: {
 		flexDirection: 'row',

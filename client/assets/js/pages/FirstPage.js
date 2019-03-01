@@ -33,10 +33,10 @@ export default class FirstPage extends Component {
 			<Text style={styles.title}>首页</Text>
 			<StatusBar
 				barStyle={Theme.barStyle}
-				backgroundColor={Theme.primary}
+				// backgroundColor={Theme.primary}
 				// 隐藏状态底板，内容区域从最顶上开始（与状态栏重叠），仍显示时间wifi等信息
-				// translucent={true} 
-				// backgroundColor={'#ffffff00'}
+				translucent={true} 
+				backgroundColor={'#ffffff00'}
 			/>
 		</View>
 		);
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		backgroundColor: Theme.paper,
+		backgroundColor: "#ffffff",
+		marginTop:25
 	},
 	title: {
 		fontSize:25,

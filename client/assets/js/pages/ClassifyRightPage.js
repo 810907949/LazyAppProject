@@ -19,18 +19,19 @@ export default class ClassifyRightPage extends Component {
 
     static propTypes = {
 		data: PropTypes.array,
+		picUrl: PropTypes.string,
     };
 
 	shouldComponentUpdate(nextProps,nextState){
 		return (this.props.data != nextProps.data);
 	}
 	
-	renderItem(item) {
+	renderItem({item}) {
 		return (
-			<View style={{marginLeft:2, marginTop:5}}>
+			<View style={{marginLeft:10, marginBottom:10}}>
 				<Image source={{uri: 'http://www.cheam.top:7000/test1.png'}}
-					style={{width: (width-90)/2, height: 200}}></Image>
-				<Text>{item.name}</Text>
+					style={{width: (width - 120)/3, height: (width - 120)/3}}></Image>
+				<Text style={{color:"#444444"}}>{item.name}</Text>
 			</View>
 		)
 	}
@@ -38,17 +39,27 @@ export default class ClassifyRightPage extends Component {
 	resetScrollView(){
 		this.refs.scrollView.scrollToIndex({index:0,animated:true})
 	}
+	
+	renderHeader() {
+		return (
+			<View style={{marginLeft:10, marginBottom:10}}>
+				<Image source={{uri: this.props.picUrl}}
+					style={{width: (width - 100), height:120}}></Image>
+			</View>
+		)
+	}
 
 	render() {
 		return (
 		<FlatList
+			ListHeaderComponent={this.renderHeader.bind(this)}
 			ref={"scrollView"}
 			data={this.props.data}
 			extraData={this.state}
 			style={styles.container}
-			numColumns={2}
+			numColumns={3}
 			keyExtractor ={(item, index) => index.toString()}
-			renderItem={({item}) => this.renderItem(item)}
+			renderItem={this.renderItem.bind(this)}
 		/>
 		)
 	}

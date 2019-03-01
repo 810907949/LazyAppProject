@@ -6,7 +6,7 @@
 import React, {Component} from 'react';
 import {View, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/AntDesign';
 import PropTypes from 'prop-types';
 
 // 取得屏幕的宽高Dimensions
@@ -76,7 +76,7 @@ export default class SearchTextInput extends Component
 			return(
 			<TouchableOpacity onPress={this.onClickCancel.bind(this)}>
 				<Icon 
-					name={'ios-close-circle'}
+					name={'closecircleo'}
 					size={20}
 					style={{
 						color: "#C2C2C2"
@@ -100,7 +100,7 @@ export default class SearchTextInput extends Component
 				alignItems: 'center',
 			}}>
 				<Icon 
-					name={'ios-search'}
+					name={'search1'}
 					size={this.props.iconSize}
 					style={{
 						marginLeft:10,

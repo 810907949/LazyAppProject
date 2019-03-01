@@ -23,7 +23,7 @@ export default class DataMgr
 		NetMgr.get("http://www.cheam.top:8080/app/category/current?id=" + id, callback)
 	}
 	
-	/**
+	/*
 	根据条件搜索商品
 		categoryId	类别id
 		keyword		关键字
