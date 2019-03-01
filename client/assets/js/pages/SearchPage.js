@@ -150,7 +150,7 @@ export default class SearchPage extends Component {
 	render() {
 		return (
 		<View style={styles.container}>
-			{ this.renderStatusBar() }
+			{/* { this.renderStatusBar() } */}
 			{ this.renderSearchInput() }
 			<View style={styles.scrollView}>
 				<FlatList
@@ -174,14 +174,13 @@ const styles = StyleSheet.create({
 		flex:1,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		backgroundColor: Theme.primary,
+		backgroundColor: "white",
 		width: width,
 		marginTop: 25,
 	},
 	searchTextInput: {
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
-		marginTop: 5,
 		alignItems: 'center',
 	},
 	scrollView: {
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		backgroundColor: Theme.primary,
+		backgroundColor: "white",
 		width:width,
 		marginBottom: 5
 	},

@@ -22,10 +22,10 @@ export default class UserPage extends Component {
 	  return (
 		<View style={styles.container}>
 			<Text style={styles.title}>用户</Text>
-			<StatusBar
+			{/* <StatusBar
 				barStyle={Theme.barStyle}
 				backgroundColor={Theme.primary}
-			/>
+			/> */}
 			<Button title='跳转登录页'
 					onPress={()=>this.props.navigation.navigate('Login')}
 			/>
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
 		backgroundColor: Theme.paper,
+		marginTop:25,
 	},
 	title: {
 		fontSize:25,

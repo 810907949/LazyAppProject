@@ -40,6 +40,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: "#FFFFFF",
+		borderLeftWidth:2,
+		borderLeftColor:"#00AF8D",
 		marginBottom: 2,
 	},
 	unSelect:{
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
 	textSelected:{
 		fontWeight:'normal',
 		fontSize:14,
-		color:"red"
+		color:"#00AF8D"
 	},
 	textUnSelect:{
 		fontWeight:'normal',

@@ -72,7 +72,7 @@ export default class ClassifyPage extends Component {
 		return (
 			<View style={[styles.searchTextInput]}>
 				<TouchableOpacity onPress={()=>this.props.navigation.navigate('Search')}>
-					<SearchTextInput {...this.props} width={width-15} height={30} searchRef="searchTextInput" placeholder="搜索店内宝贝" editable={false} />
+					<SearchTextInput {...this.props} width={width-20} height={30} searchRef="searchTextInput" placeholder="搜索店内宝贝" editable={false} />
 				</TouchableOpacity>
 			</View>)
 	}
@@ -161,11 +161,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
 		backgroundColor: Theme.paper,
+		marginTop:25,
 	},
 	searchTextInput: {
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
-		marginTop: 5,
 		alignItems: 'center',
 	},
 	title: {
@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
 		width: width,
 		height: 40,
 		textAlign:'center',
-		marginTop:30,
 	},
 	searchBtn:{
 		color:"#4876FF",
@@ -188,6 +187,8 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start',
 		backgroundColor: "#FFFFFF00",
 		flexDirection: 'row',
+		borderTopColor:'#ebebeb',
+		borderTopWidth:1,
 	},
 	scrollLeft:{
 		width:80,

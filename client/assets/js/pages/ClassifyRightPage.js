@@ -29,9 +29,9 @@ export default class ClassifyRightPage extends Component {
 	renderItem({item}) {
 		return (
 			<View style={{marginLeft:10, marginBottom:10}}>
-				<Image source={{uri: 'http://www.cheam.top:7000/test1.png'}}
-					style={{width: (width - 120)/3, height: (width - 120)/3}}></Image>
-				<Text style={{color:"#444444"}}>{item.name}</Text>
+				<Image source={{uri: item.picUrl}}
+					style={{width: (width - 120)/3, height: (width - 120)/3, borderRadius: 5}}></Image>
+				<Text style={{color:"#444444", fontSize:12, textAlign:"center"}}>{item.name}</Text>
 			</View>
 		)
 	}
@@ -44,7 +44,7 @@ export default class ClassifyRightPage extends Component {
 		return (
 			<View style={{marginLeft:10, marginBottom:10}}>
 				<Image source={{uri: this.props.picUrl}}
-					style={{width: (width - 100), height:120}}></Image>
+					style={{width: (width - 100), height:90, borderRadius: 5}}></Image>
 			</View>
 		)
 	}

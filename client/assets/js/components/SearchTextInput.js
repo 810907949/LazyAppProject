@@ -79,7 +79,7 @@ export default class SearchTextInput extends Component
 					name={'closecircleo'}
 					size={20}
 					style={{
-						color: "#C2C2C2"
+						color: "#000000"
 					}}
 				/>	
 			</TouchableOpacity>)
@@ -92,7 +92,7 @@ export default class SearchTextInput extends Component
 				width: this.props.width,
 				height:this.props.height,
 				borderColor:"#ebebeb",
-				backgroundColor:"white",
+				backgroundColor:"#EEEEEE",
 				borderWidth:1,
 				marginLeft:10,
 				borderRadius:20,
@@ -116,7 +116,7 @@ export default class SearchTextInput extends Component
 						width: this.props.width - 65,
 						height:this.props.height,
 						borderWidth:0,
-						marginLeft:5,
+						marginLeft:0,
 						paddingVertical: 0,
 					}}//input框的基本样式
 					onChangeText={this.onChangeText.bind(this)}//输入框改变触发的函数
