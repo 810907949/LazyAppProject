@@ -8,7 +8,9 @@ import {
   View,
   Button,
   StatusBar,
-  Dimensions
+  Dimensions,
+  Linking,
+  TouchableOpacity
 } from 'react-native';
 
 import {createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
@@ -26,12 +28,15 @@ export default class UserPage extends Component {
 				barStyle={Theme.barStyle}
 				backgroundColor={Theme.primary}
 			/> */}
-			<Button title='跳转登录页'
-					onPress={()=>this.props.navigation.navigate('Login')}
-			/>
-			<Button title='跳转设置页'
-					onPress={()=>this.props.navigation.navigate('Setting')}
-			/>
+			<TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')} style={styles.item}>
+				<Text style={styles.text}>登录</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={()=>this.props.navigation.navigate('Setting')} style={styles.item}>
+				<Text style={styles.text}>设置</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={()=>Linking.openURL("tel:" + '10086')} style={styles.item}>
+				<Text style={styles.text}>客服咨询</Text>
+			</TouchableOpacity>
 		</View>
 	  );
 	}
@@ -46,11 +51,18 @@ const styles = StyleSheet.create({
 		backgroundColor: Theme.paper,
 		marginTop:25,
 	},
-	title: {
-		fontSize:25,
+	item: {
+		fontSize:14,
 		backgroundColor: Theme.primary,
+		color:"#444444",
 		width: width,
 		height: 40,
-		textAlign:'center'
+		marginTop:4,
+	},
+	text: {
+		fontSize:14,
+		height: 40,
+		textAlignVertical:'center',
+		color:"#444444",
 	},
 });

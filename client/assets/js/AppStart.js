@@ -39,7 +39,7 @@ const MainStack = createBottomTabNavigator(
 				tabBarIcon:({focused,tintColor}) => (  
 					<Image 
 						source={focused ? require("../res/index/mainB.png") : require("../res/index/main.png")}
-						style={[styles.tabBarIcon]}
+						style={[styles.tabBarIcon, {tintColor:tintColor}]}
 					/>
 				)  
 			}),  
@@ -54,7 +54,7 @@ const MainStack = createBottomTabNavigator(
 				tabBarIcon:({focused,tintColor}) => (  
 					<Image 
 						source={focused ? require("../res/index/classB.png") : require("../res/index/class.png")}
-						style={[styles.tabBarIcon]}
+						style={[styles.tabBarIcon, {tintColor:tintColor}]}
 					/>
 				)  
 			}),  
@@ -69,7 +69,7 @@ const MainStack = createBottomTabNavigator(
 				tabBarIcon:({focused,tintColor}) => (  
 					<Image 
 						source={focused ? require("../res/index/articleB.png") : require("../res/index/article.png")}
-						style={[styles.tabBarIcon]}
+						style={[styles.tabBarIcon, {tintColor:tintColor}]}
 					/>
 				)  
 			}),  
@@ -84,7 +84,7 @@ const MainStack = createBottomTabNavigator(
 				tabBarIcon:({focused,tintColor}) => (  
 					<Image 
 						source={focused ? require("../res/index/snsB.png") : require("../res/index/sns.png")}
-						style={[styles.tabBarIcon]}
+						style={[styles.tabBarIcon, {tintColor:tintColor}]}
 					/>
 				)  
 			}),  
@@ -116,7 +116,7 @@ const MainStack = createBottomTabNavigator(
 				tabBarIcon:({focused,tintColor}) => ( 
 					<Image 
 						source={focused ? require("../res/index/myB.png") : require("../res/index/my.png")}
-						style={[styles.tabBarIcon]}
+						style={[styles.tabBarIcon, {tintColor:tintColor}]}
 					/>
 				)  
 			}),  
@@ -127,7 +127,8 @@ const MainStack = createBottomTabNavigator(
 		animationEnabled: true,
 		swipeEnabled: true,
 		tabBarOptions: {
-			activeTintColor: "#00AF8D",
+			// activeTintColor: "#00AF8D",
+			activeTintColor: "red",
 			inactiveTintColor: '#444444',
 			style :{
 				borderTopColor:'#ebebeb',
