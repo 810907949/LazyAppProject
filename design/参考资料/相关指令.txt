@@ -1,0 +1,7 @@
+
+cd 到 client 目录：
+
+android bundle生成(在package.json里的scripts里面可配置指令)： npm run bundle-android
+项目初始化： npm install
+动态调试android：react-native run-android
+android打包Apk：cd android && gradlew assembleRelease
